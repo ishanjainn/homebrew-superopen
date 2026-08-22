@@ -8,7 +8,7 @@
 class So < Formula
   desc "Native code graph and coding-session observability"
   homepage "https://github.com/ishanjainn/superopen"
-  version "0.4.0"
+  version "0.5.0"
   license "Apache-2.0"
 
   head do
@@ -19,31 +19,70 @@ class So < Formula
   on_macos do
     on_arm do
       url "https://github.com/ishanjainn/superopen/releases/download/cli-#{version}/so-darwin-arm64.tar.gz"
-      sha256 "5c527d8957d95a8b7e5fc8df71b95d4779c42ed1e61acf02a83ffcbe80596449"
+      sha256 "202fa3d6699cb410c56aed1cb4902d17d4206c9d03a9f29e5e65f08675067531"
     end
     on_intel do
       url "https://github.com/ishanjainn/superopen/releases/download/cli-#{version}/so-darwin-amd64.tar.gz"
-      sha256 "f44cf602cb60de24ebaceac2a5702cf8ad6c5bad8ef32e1f1e00cc7ef907f9bb"
+      sha256 "802acf4c886fb44cd08bf2e76acf9ab978c94d0f4e7a7dd3ad38d496a8522eb9"
     end
   end
 
   on_linux do
     on_arm do
       url "https://github.com/ishanjainn/superopen/releases/download/cli-#{version}/so-linux-arm64.tar.gz"
-      sha256 "2591b2d7f9137204ccc045511baf9667552289573e8591ad5d5ba43fce6f403b"
+      sha256 "c804dffbd1cb481b44fcd30f590303607725b4e9299b8cc95fd374745a57520e"
     end
     on_intel do
       url "https://github.com/ishanjainn/superopen/releases/download/cli-#{version}/so-linux-amd64.tar.gz"
-      sha256 "3f8b00e2573fee6c01d9eacbbf125fae3c849882f5493b2032956454ec6a1991"
+      sha256 "f191736da95f50f01e11dce9d56182d1b4f944f8ce21668ecd7845064d761e7d"
     end
   end
+
+  resource "web" do
+    url "https://github.com/ishanjainn/superopen/releases/download/cli-#{version}/so-web.tar.gz"
+    sha256 "83aa1b99830c1647bc3e558d82c955a6bbe0c6389f0138a2425e4fc708caa576"
+  end
+
+  depends_on "node"
 
   def install
     if build.head?
       system "go", "build", "-o", bin/"so", "./cmd/so"
+      cd "web" do
+        system "npm", "install", "--ignore-scripts"
+        system "npm", "run", "build"
+      end
+      standalone = buildpath/"web/.next/standalone"
+      odie "web UI standalone build missing" unless (standalone/"server.js").exist?
+      static_dir = buildpath/"web/.next/static"
+      if static_dir.exist?
+        (standalone/".next/static").mkpath
+        static_dir.children.each { |child| cp_r child, standalone/".next/static"/child.basename }
+      end
+      public_dir = buildpath/"web/public"
+      if public_dir.exist?
+        (standalone/"public").mkpath
+        public_dir.children.each { |child| cp_r child, standalone/"public"/child.basename }
+      end
+      dst = share/"superopen/web"
+      dst.mkpath
+      standalone.children.each { |child| cp_r child, dst/child.basename }
     else
       bin.install Dir["so*"].first => "so"
+      resource("web").stage do
+        dst = share/"superopen/web"
+        dst.mkpath
+        Pathname(".").children.each { |child| cp_r child, dst/child.basename }
+      end
     end
+  end
+
+  def caveats
+    <<~EOS
+      Run `so install` once to wire coding-agent hooks.
+      Then in any repo: `so init` and `so dev`.
+      `so dev` needs Node.js (already installed as a dependency).
+    EOS
   end
 
   test do
