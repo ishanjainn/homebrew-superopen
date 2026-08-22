@@ -18,28 +18,28 @@ class So < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/ishanjainn/superopen/releases/download/cli-#{version}/so-darwin-arm64.tar.gz"
+      url "https://github.com/ishanjainn/superopen/releases/download/cli-0.5.0/so-darwin-arm64.tar.gz"
       sha256 "202fa3d6699cb410c56aed1cb4902d17d4206c9d03a9f29e5e65f08675067531"
     end
     on_intel do
-      url "https://github.com/ishanjainn/superopen/releases/download/cli-#{version}/so-darwin-amd64.tar.gz"
+      url "https://github.com/ishanjainn/superopen/releases/download/cli-0.5.0/so-darwin-amd64.tar.gz"
       sha256 "802acf4c886fb44cd08bf2e76acf9ab978c94d0f4e7a7dd3ad38d496a8522eb9"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/ishanjainn/superopen/releases/download/cli-#{version}/so-linux-arm64.tar.gz"
+      url "https://github.com/ishanjainn/superopen/releases/download/cli-0.5.0/so-linux-arm64.tar.gz"
       sha256 "c804dffbd1cb481b44fcd30f590303607725b4e9299b8cc95fd374745a57520e"
     end
     on_intel do
-      url "https://github.com/ishanjainn/superopen/releases/download/cli-#{version}/so-linux-amd64.tar.gz"
+      url "https://github.com/ishanjainn/superopen/releases/download/cli-0.5.0/so-linux-amd64.tar.gz"
       sha256 "f191736da95f50f01e11dce9d56182d1b4f944f8ce21668ecd7845064d761e7d"
     end
   end
 
   resource "web" do
-    url "https://github.com/ishanjainn/superopen/releases/download/cli-#{version}/so-web.tar.gz"
+    url "https://github.com/ishanjainn/superopen/releases/download/cli-0.5.0/so-web.tar.gz"
     sha256 "83aa1b99830c1647bc3e558d82c955a6bbe0c6389f0138a2425e4fc708caa576"
   end
 
