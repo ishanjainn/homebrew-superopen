@@ -8,7 +8,7 @@
 class So < Formula
   desc "Native code graph and coding-session observability"
   homepage "https://github.com/ishanjainn/superopen"
-  version "0.8.0"
+  version "0.9.0"
   license "Apache-2.0"
 
   head do
@@ -18,29 +18,29 @@ class So < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/ishanjainn/superopen/releases/download/cli-0.8.0/so-darwin-arm64.tar.gz"
-      sha256 "91073223b9b1cc8e4f77596f28cc93ad3dcc3cb3c58bd34cbe695230b6ca5be2"
+      url "https://github.com/ishanjainn/superopen/releases/download/cli-0.9.0/so-darwin-arm64.tar.gz"
+      sha256 "7b9f0e74c419ae21491336ce608892dc112ac6be4c80f866cb5b8a9e8a00620a"
     end
     on_intel do
-      url "https://github.com/ishanjainn/superopen/releases/download/cli-0.8.0/so-darwin-amd64.tar.gz"
-      sha256 "4f00de6e42bfae3fa4b1a342e586b9f41c6a89bf83530c09ddeb8c135e95e06f"
+      url "https://github.com/ishanjainn/superopen/releases/download/cli-0.9.0/so-darwin-amd64.tar.gz"
+      sha256 "5c0779afb5eb34be632eb08bf9d2bceaec64b1e289954e911aa7fc23c5390e0a"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/ishanjainn/superopen/releases/download/cli-0.8.0/so-linux-arm64.tar.gz"
-      sha256 "39c4d60c162f4f616adc58ba9528a179b4652223850b9f5c230ed0cda1c29003"
+      url "https://github.com/ishanjainn/superopen/releases/download/cli-0.9.0/so-linux-arm64.tar.gz"
+      sha256 "fefe3c2e15ebb61d7d1c63983f7b3fdc467ee3b59bc13914fa34caaa2c35424c"
     end
     on_intel do
-      url "https://github.com/ishanjainn/superopen/releases/download/cli-0.8.0/so-linux-amd64.tar.gz"
-      sha256 "9f03ea70abb1a3800f350994d59664abd8c5728638996b39c3dd77cd35992df2"
+      url "https://github.com/ishanjainn/superopen/releases/download/cli-0.9.0/so-linux-amd64.tar.gz"
+      sha256 "d7c20a05577aa975670d082a1a790c3d4ba6782f7528c3567fbafcfc3e0a9351"
     end
   end
 
   resource "web" do
-    url "https://github.com/ishanjainn/superopen/releases/download/cli-0.8.0/so-web.tar.gz"
-    sha256 "4391708849e292d79e84484923d41ca570126a32c41d37e99ec5f28099230adc"
+    url "https://github.com/ishanjainn/superopen/releases/download/cli-0.9.0/so-web.tar.gz"
+    sha256 "ae795d669cd04ae46907408be38631973118e4cdcf7437ea6b44b0a4236c3faf"
   end
 
   depends_on "node"
